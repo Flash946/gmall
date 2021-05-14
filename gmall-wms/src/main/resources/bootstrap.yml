@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: pms-service
+  cloud:
+    nacos:
+      config:
+        server-addr: 127.0.0.1:8848
+        namespace: dc2765b8-6e5a-44a3-bbf9-35aa82861b05
+        group: dev
+        #        properties默认的 现在是yml需要制定 2021年5月13日10:52:59
+        file-extension: yml
+
+
+

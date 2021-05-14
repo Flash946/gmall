@@ -1,0 +1,43 @@
+server:
+  port: 18081
+spring:
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+    sentinel:
+#      enabled: true  以?有??
+      transport:
+        dashboard: localhost:8080
+        port: 8719
+
+  zipkin:
+    base-url: localhost:9411
+    sender:
+      type: web
+    locator:
+      discovery:
+        enabled: false
+
+  sleuth:
+    sampler:
+      probability: 1
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/guli_pms
+    password: Gepoint
+    username: root
+  redis:
+#   是??地址啊  128
+    host: 192.168.1.128
+# ????忘了
+feign:
+  sentinel:
+    enabled: true
+mybatis-plus:
+  mapper-locations: classpath:mapper/pms/**/*.xml
+  type-aliases-package: com.atguigu.gmall.pms.entity
+#  id自增策略
+  global-config:
+    db-config:
+      id-type: auto
