@@ -1,11 +1,12 @@
 spring:
   application:
-    name: pms-service
+    name: wms-service
   cloud:
     nacos:
       config:
-        server-addr: 127.0.0.1:8848
-        namespace: dc2765b8-6e5a-44a3-bbf9-35aa82861b05
+        server-addr: 81.68.223.33:8848
+        namespace: 7fdbdab3-2f8d-48b7-8f6a-168186fc5600
+
         group: dev
         #        properties默认的 现在是yml需要制定 2021年5月13日10:52:59
         file-extension: yml

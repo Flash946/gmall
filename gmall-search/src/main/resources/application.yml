@@ -1,0 +1,62 @@
+server:
+  # cs是否会乱码  test if luanma  2021年5月22日15:11:17
+  port: 18086
+spring:
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 81.68.223.33:8848
+    sentinel:
+      transport:
+        dashboard: 81.68.223.33:8080
+        port: 8719
+
+  zipkin:
+    base-url: 81.68.223.33:9411
+    sender:
+      type: web
+    # 2021年5月25日14:21:22  与sender平级的  这个注解对着老师这项目新加的？ 原来的我pms写错了？
+    discovery-client-enabled: false
+
+  sleuth:
+    sampler:
+      probability: 1
+
+  elasticsearch:
+    rest:
+      uris: 192.168.1.130:9200
+  # 2021年5月26日16:47:10  day9 p7最后新增 不包含空的json  spring底层反序列化的时候
+  jackson:
+    default-property-inclusion: non_null
+  # 2021年5月27日10:12:39  这边是消费者 所以不配置生产者了
+  rabbitmq:
+    host: 192.168.1.130
+    virtual-host: /flash
+    username: flash
+    password: flash
+    listener:
+      simple:
+        prefetch: 1   #能者多劳
+        acknowledge-mode: manual
+#    publisher-returns: true
+feign:
+  sentinel:
+    enabled: true
+
+
+
+
+#hystrix的超时时间
+hystrix:
+  command:
+    default:
+      execution:
+        timeout:
+          enabled: true
+        isolation:
+          thread:
+            timeoutInMilliseconds: 30000
+#ribbon的超时时间
+ribbon:
+  ReadTimeout: 30000
+  ConnectTimeout: 30000

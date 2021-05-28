@@ -2,6 +2,8 @@ package com.atguigu.gmall.pms.controller;
 
 import java.util.List;
 
+import com.atguigu.gmall.pms.entity.CategoryVo;
+import com.atguigu.gmall.pms.entity.ItemCategoryVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -90,4 +92,30 @@ public class CategoryController {
         return ResponseVo.ok();
     }
 
+    @GetMapping("/parent/{parenrId}")
+    public ResponseVo<List<CategoryEntity>>  queryCatagoryById(@PathVariable("parenrId") Long id){
+        List<CategoryEntity>  categoryEntityList= categoryService.queryCatagoryById(id);
+        return  ResponseVo.ok(categoryEntityList);
+    }
+    //============================================
+    /**
+     * 新增方法 day11 p6
+     */
+    @GetMapping("/lv11/{pid}")
+    public ResponseVo<List<CategoryVo>> queryCategoryVoByPid(@PathVariable("pid") Long pid){
+        List<CategoryVo> categoryVos =   this.categoryService.queryCategoryVoByPid(pid);
+        return ResponseVo.ok(categoryVos);
+    }
+
+    /**
+     * 根据三级分类
+     * 2021年5月27日21:22:29
+     * @param cid3
+     * @return
+     */
+    @GetMapping("/all/{cid3}")
+    public ResponseVo<List<ItemCategoryVo>> queryCategoryVoByCid3(@PathVariable("cid3") Long cid3){
+        List<ItemCategoryVo> itemCategoryVos =   this.categoryService.queryCategoryVoByCid3(cid3);
+        return ResponseVo.ok(itemCategoryVos);
+    }
 }

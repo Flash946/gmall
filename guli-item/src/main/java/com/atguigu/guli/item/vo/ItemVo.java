@@ -1,5 +1,6 @@
 package com.atguigu.guli.item.vo;
 
+import com.atguigu.gmall.pms.entity.ItemCategoryVo;
 import com.atguigu.gmall.pms.entity.SkuImagesEntity;
 import lombok.Data;
 
@@ -19,13 +20,14 @@ public class ItemVo {
     private Long spuId;
     private String spuName;
 
-    //sku
+    //sku Y
     private Long skuId;
     private String title;
     private String subTitle;
     private BigDecimal price;
-    private BigDecimal weight;//重量。快递费跟之有关，所以可能被计算 用这个类型
-    private String defaultImages;
+    private Integer weight;//重量。快递费跟之有关，所以可能被计算 用这个类型
+    private String defaultImage;
+
 
     //营销信息
     private List<ItemSaleVo> sales; //

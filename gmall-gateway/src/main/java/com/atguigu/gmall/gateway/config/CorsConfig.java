@@ -14,6 +14,9 @@ public class CorsConfig {
         CorsConfiguration corsConfiguration = new CorsConfiguration();
         //add是1个 允许哪个域名  注意这边不要写*  否则无法携带cookie。  这边也要加上“http://”  即必须添加协议，老师笔记有误。
         corsConfiguration.addAllowedOrigin("http://manager.gmall.com");
+        corsConfiguration.addAllowedOrigin("http://api.gmall.com");
+        corsConfiguration.addAllowedOrigin("http://81.68.223.33:1000");
+        corsConfiguration.addAllowedOrigin("http://81.68.223.33:18080");
         //允许携带任何头信息及所有请求方法跨域访问
         corsConfiguration.addAllowedHeader("*");
         corsConfiguration.addAllowedMethod("*");

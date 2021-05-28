@@ -1,0 +1,26 @@
+server:
+  port: 18087
+spring:
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 81.68.223.33:8848
+    sentinel:
+      transport:
+        dashboard: 81.68.223.33:8080
+        port: 8719
+  zipkin:
+    base-url: http://81.68.223.33:9411/
+    sender:
+      type: web
+    discovery-client-enabled: false
+  sleuth:
+    sampler:
+      probability: 1
+  redis:
+    host: 192.168.1.130
+  thymeleaf:
+    cache: false
+feign:
+  sentinel:
+    enabled: true

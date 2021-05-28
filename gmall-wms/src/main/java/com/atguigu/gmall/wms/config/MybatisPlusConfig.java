@@ -1,4 +1,4 @@
-package config;
+package com.atguigu.gmall.wms.config;
 
 import com.baomidou.mybatisplus.annotation.DbType;
 import com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor;

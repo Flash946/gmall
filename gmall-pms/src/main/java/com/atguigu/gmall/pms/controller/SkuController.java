@@ -2,6 +2,7 @@ package com.atguigu.gmall.pms.controller;
 
 import java.util.List;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -89,5 +90,12 @@ public class SkuController {
 
         return ResponseVo.ok();
     }
+    /*  以下是我写的代码。上面是mp自动生成的  2021年5月14日11:46:26 */
 
+    @GetMapping("/spu/{spuId}")
+    public ResponseVo<List<SkuEntity>> querySkuBySquId(@PathVariable("spuId") Long spuId){
+        List<SkuEntity> skuEntities= skuService.list(new QueryWrapper<SkuEntity>().eq("spu_id",spuId));
+
+        return ResponseVo.ok(skuEntities);
+    }
 }

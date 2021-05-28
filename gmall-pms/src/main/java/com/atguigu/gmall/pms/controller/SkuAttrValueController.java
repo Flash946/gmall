@@ -2,6 +2,7 @@ package com.atguigu.gmall.pms.controller;
 
 import java.util.List;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -90,4 +91,29 @@ public class SkuAttrValueController {
         return ResponseVo.ok();
     }
 
+    /*  以下是我写的代码。上面是mp自动生成的  2021年5月22日18:48:45 */
+    /**
+     * 2021年5月22日18:40:27  问号只能通过注解接收
+     * @param skuId
+     * @param attrIds
+     * @return
+     */
+    @GetMapping("/search/attr")
+    @ApiOperation("day8-p5-45min")
+    public ResponseVo<List<SkuAttrValueEntity>> querySkuSearchAttrValue(@RequestParam("skuId") Long skuId,@RequestParam("attrIds") List<Long> attrIds){
+
+        List<SkuAttrValueEntity> skuAttrValueEntities = this.skuAttrValueService.list(new QueryWrapper<SkuAttrValueEntity>().eq("sku_id", skuId).in("attr_id", attrIds));
+        return ResponseVo.ok(skuAttrValueEntities);
+    }
+
+    /**
+     * day13 p5 2021年5月28日14:49:43  用到  但我没写！复制过来了
+     * @param spuId
+     * @return
+     */
+    @GetMapping("spu/{spuId}")
+    public ResponseVo<List<SkuAttrValueEntity>> querySkuAttrValuesBySpuId(@PathVariable("spuId")Long spuId){
+        List<SkuAttrValueEntity> skuAttrValueEntities = this.skuAttrValueService.querySkuAttrValuesBySpuId(spuId);
+        return ResponseVo.ok(skuAttrValueEntities);
+    }
 }

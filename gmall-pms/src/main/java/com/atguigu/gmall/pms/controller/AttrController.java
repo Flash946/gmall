@@ -2,6 +2,8 @@ package com.atguigu.gmall.pms.controller;
 
 import java.util.List;
 
+import com.atguigu.gmall.pms.entity.AttrGroupEntity;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -88,6 +90,21 @@ public class AttrController {
 		attrService.removeByIds(ids);
 
         return ResponseVo.ok();
+    }
+
+    /*  以下是我写的代码。上面是mp自动生成的  2021年5月14日11:46:26 */
+    @GetMapping("/group/{gid}")
+    public ResponseVo<List<AttrEntity>> queryAttrByGid(@PathVariable("gid") Long gid){
+        List<AttrEntity> attrEntities = attrService.list(new QueryWrapper<AttrEntity>().eq("group_id", gid));
+
+        return ResponseVo.ok(attrEntities);
+    }
+
+    @GetMapping("/category/{cid}")
+    public ResponseVo<List<AttrEntity>> queryAttrByCid(@PathVariable("cid") Long cid,@RequestParam(value = "type",required = false) Integer type,@RequestParam(value = "searchType",required = false) Integer searchType){
+        List<AttrEntity> attrEntities = attrService.queryAttrByCid(cid,type,searchType);
+
+        return ResponseVo.ok(attrEntities);
     }
 
 }

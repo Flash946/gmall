@@ -1,7 +1,9 @@
 package com.atguigu.gmall.pms.controller;
 
+import java.io.FileNotFoundException;
 import java.util.List;
 
+import com.atguigu.gmall.pms.vo.SpuVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,8 +64,8 @@ public class SpuController {
      */
     @PostMapping
     @ApiOperation("保存")
-    public ResponseVo<Object> save(@RequestBody SpuEntity spu){
-		spuService.save(spu);
+    public ResponseVo<Object> save(@RequestBody SpuVo spu) throws FileNotFoundException {
+		spuService.bigSave(spu);
 
         return ResponseVo.ok();
     }
@@ -90,4 +92,25 @@ public class SpuController {
         return ResponseVo.ok();
     }
 
+    /*  以下是我写的代码。上面是mp自动生成的  2021年5月14日11:46:26 */
+
+    @GetMapping("/category/{categoryId}")
+    public ResponseVo<PageResultVo> querySpuByCidPage(PageParamVo paramVo,@PathVariable("categoryId") Long categoryId){
+        PageResultVo pageResultVo = spuService.querySpuByCidPage(paramVo,categoryId);
+
+        return ResponseVo.ok(pageResultVo);
+    }
+
+
+
+    /**
+     * 复制的list方法   2021年5月22日17:06:07
+     */
+    @PostMapping("/page")
+    @ApiOperation("分页查询")
+    public ResponseVo<List<SpuEntity>> querySpuByPage(@RequestBody PageParamVo paramVo){
+        PageResultVo pageResultVo = spuService.queryPage(paramVo);
+
+        return ResponseVo.ok((List<SpuEntity>)pageResultVo.getList());
+    }
 }

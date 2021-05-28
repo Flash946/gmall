@@ -2,6 +2,10 @@ package com.atguigu.gmall.pms.controller;
 
 import java.util.List;
 
+import com.atguigu.gmall.pms.entity.AttrEntity;
+import com.atguigu.gmall.pms.entity.ItemGroupVo;
+import com.atguigu.gmall.pms.vo.GroupVo;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -90,4 +94,39 @@ public class AttrGroupController {
         return ResponseVo.ok();
     }
 
+
+
+    /*  以下是我写的代码。上面是mp自动生成的  2021年5月14日11:46:26 */
+    @GetMapping("/category/{cid}")
+    public ResponseVo<List<AttrGroupEntity>> queryGroupByCid(@PathVariable("cid") Long cid){
+        List<AttrGroupEntity> groupEntities = attrGroupService.list(new QueryWrapper<AttrGroupEntity>().eq("category_id", cid));
+
+        return ResponseVo.ok(groupEntities);
+    }
+
+
+    @GetMapping("/withattrs/{cartId}")
+    public ResponseVo<List<GroupVo>> queryAttrByGid(@PathVariable("cartId") Long cartId){
+        List<GroupVo> groupVos = attrGroupService.queryGroupWithAttrsByCid(cartId);
+
+        return ResponseVo.ok(groupVos);
+    }
+
+    /**
+     * day13-p4 52min
+     * 2021年5月27日21:49:53
+     * @param cid
+     * @param spuId
+     * @param skuId
+     * @return
+     */
+    @GetMapping("attr/withvalue")
+    public ResponseVo<List<ItemGroupVo>> queryGoupsWithAttrValues(
+            @RequestParam("cid") Long cid,
+            @RequestParam("spuId") Long spuId,
+            @RequestParam("skuId") Long skuId
+    ){
+        List<ItemGroupVo> itemGroupVos = this.attrGroupService.queryGoupsWithAttrValues(cid, spuId, skuId);
+        return ResponseVo.ok(itemGroupVos);
+    }
 }
