@@ -1,0 +1,51 @@
+server:
+  port: 18089
+spring:
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 81.68.223.33:8848
+    sentinel:
+#      enabled: true  �H?��??
+      transport:
+        dashboard: 81.68.223.33:8080
+        port: 8719
+
+  zipkin:
+    base-url: 81.68.223.33:9411
+    sender:
+      type: web
+    locator:
+      discovery:
+        enabled: false
+
+  sleuth:
+    sampler:
+      probability: 1
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/guli_wms
+    password: Gepoint
+    username: root
+  redis:
+#   �O??�a�}��  128
+    host: 192.168.1.128
+# ????�ѤF
+feign:
+  sentinel:
+    enabled: true
+mybatis-plus:
+  mapper-locations: classpath:mapper/wms/**/*.xml
+  type-aliases-package: com.atguigu.gmall.wms.entity
+#  id�ۼW����
+  global-config:
+    db-config:
+      id-type: auto
+# day15 p2
+auth:
+  jwt:
+    pubKeyPath: D:\\project\\rsa\\rsa.pub
+    priKeyPath: D:\\project\\rsa\\rsa.pri
+    secret: flash@zyf
+    cookieName: GMALL-TOKEN
+    expire: 180
