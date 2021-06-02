@@ -5,13 +5,15 @@ spring:
     nacos:
       discovery:
         server-addr: 81.68.223.33:8848
-
+#        ip: 81.68.223.33
     gateway:
       routes:
         - id: pms-route
           uri: lb://pms-service
           predicates:
             - Path=/pms/**
+          filters:
+            - Auth
         - id: sms-route
           uri: lb://sms-service
           predicates:
@@ -32,3 +34,30 @@ spring:
           uri: lb://search-service
           predicates:
             - Path=/search/**
+        - id: index-route
+          uri: lb://index-service
+          predicates:
+            - Path=/index/**
+        - id: auth-route
+          uri: lb://auth-service
+          predicates:
+            - Path=/auth/**
+        - id: cart-route
+          uri: lb://cart-service
+          predicates:
+            - Path=/cart/**
+        - id: order-route  #新2021年6月1日17:55:44  day17p3
+          uri: lb://order-service
+          predicates:
+            - Path=/order/**
+          fiters:
+            - Auth
+      x-forwarded:
+        host-enabled: true
+
+# day15 p7  网关只有公钥 只有auth自己有私钥
+auth:
+  jwt:
+#    pubKeyPath: D:\\project\\rsa\\rsa.pub
+    pubKeyPath: D:\\project\\rsa\\rsa.pub
+    cookieName: GMALL-TOKEN
