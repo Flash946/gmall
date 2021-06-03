@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: order-service
+  cloud:
+    nacos:
+      config:
+        server-addr: 81.68.223.33:8848
+
+
+
+

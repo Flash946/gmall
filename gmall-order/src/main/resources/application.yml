@@ -1,0 +1,58 @@
+server:
+  port: 18091
+spring:
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 81.68.223.33:8848
+    sentinel:
+      transport:
+        dashboard: 81.68.223.33:8080
+        port: 8719
+
+  zipkin:
+    base-url: 81.68.223.33:9411
+    sender:
+      type: web
+    locator:
+      discovery:
+        enabled: false
+
+  sleuth:
+    sampler:
+      probability: 1
+
+  redis:
+    host: 192.168.1.131
+  rabbitmq:
+    host: 192.168.1.131
+    virtual-host: /flash
+    username: flash
+    password: flash
+#    这块弄个生产者确认 2021年6月1日17:54:08
+    listener:
+      simple:
+        prefetch: 1
+        acknowledge-mode: manual
+feign:
+  sentinel:
+    enabled: true
+mybatis-plus:
+  mapper-locations: classpath:mapper/wms/**/*.xml
+  type-aliases-package: com.atguigu.gmall.wms.entity
+  global-config:
+    db-config:
+      id-type: auto
+
+auth:
+  jwt:
+    pubKeyPath: D:\\project\\rsa\\rsa.pub
+    cookieName: GMALL-TOKEN
+
+
+#thread:
+#  pool:
+#    coreSize: 100
+#    maxSize: 500
+#    keepalive: 60
+#    blockQueneSize: 1000
